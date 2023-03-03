@@ -1,12 +1,9 @@
-use std::io;
-use tui::{
-    backend::CrosstermBackend,
-    Terminal
-};
 use crossterm::{
     execute,
-    terminal::{EnterAlternateScreen, LeaveAlternateScreen, enable_raw_mode, disable_raw_mode},
+    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
+use std::io;
+use tui::{backend::CrosstermBackend, Terminal};
 
 fn main() -> Result<(), io::Error> {
     // setup terminal
@@ -18,10 +15,7 @@ fn main() -> Result<(), io::Error> {
 
     // restore terminal
     disable_raw_mode()?;
-    execute!(
-        terminal.backend_mut(),
-        LeaveAlternateScreen,
-    )?;
+    execute!(terminal.backend_mut(), LeaveAlternateScreen,)?;
     terminal.show_cursor()?;
 
     Ok(())
