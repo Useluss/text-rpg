@@ -1,8 +1,8 @@
-use bevy::prelude::*;
 use crossterm::{
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
+use specs::{World, WorldExt};
 use std::io;
 use tui::{backend::CrosstermBackend, Terminal};
 
@@ -14,7 +14,7 @@ fn main() -> Result<(), io::Error> {
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
-    App::new().run();
+    let mut world = World::new();
 
     // restore terminal
     disable_raw_mode()?;
